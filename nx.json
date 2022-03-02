@@ -1,0 +1,38 @@
+{
+  "npmScope": "wsl-gui",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "wsl-ui": {
+      "tags": []
+    },
+    "wsl-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": ["wsl-ui"]
+    }
+  }
+}
