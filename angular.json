@@ -1,6 +1,99 @@
 {
   "version": 1,
   "projects": {
+    "models": {
+      "projectType": "library",
+      "root": "libs/models",
+      "sourceRoot": "libs/models/src",
+      "prefix": "wsl-gui",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/models"],
+          "options": {
+            "jestConfig": "libs/models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/models/src/**/*.ts",
+              "libs/models/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "wsl-desktop": {
+      "root": "apps/wsl-desktop",
+      "sourceRoot": "apps/wsl-desktop/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "nx-electron:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/wsl-desktop",
+            "main": "apps/wsl-desktop/src/main.ts",
+            "tsConfig": "apps/wsl-desktop/tsconfig.app.json",
+            "assets": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/wsl-desktop/src/environments/environment.ts",
+                  "with": "apps/wsl-desktop/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "nx-electron:execute",
+          "options": {
+            "buildTarget": "wsl-desktop:build"
+          }
+        },
+        "package": {
+          "builder": "nx-electron:package",
+          "options": {
+            "name": "wsl-desktop",
+            "frontendProject": "wsl-ui",
+            "outputPath": "dist/packages",
+            "prepackageOnly": true
+          }
+        },
+        "make": {
+          "builder": "nx-electron:make",
+          "options": {
+            "name": "wsl-desktop",
+            "frontendProject": "wsl-ui",
+            "outputPath": "dist/executables"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/wsl-desktop/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/wsl-desktop"],
+          "options": {
+            "jestConfig": "apps/wsl-desktop/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "wsl-ui": {
       "projectType": "application",
       "root": "apps/wsl-ui",
@@ -17,8 +110,14 @@
             "polyfills": "apps/wsl-ui/src/polyfills.ts",
             "tsConfig": "apps/wsl-ui/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/wsl-ui/src/favicon.ico", "apps/wsl-ui/src/assets"],
-            "styles": ["apps/wsl-ui/src/styles.scss"],
+            "assets": ["apps/wsl-ui/src/favicon.ico", "apps/wsl-ui/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@salesforce-ux/design-system/assets/",
+                "output": "/assets"
+              }],
+            "styles": [ "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
+             "node_modules/@angular/cdk/overlay-prebuilt.css","apps/wsl-ui/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -64,7 +163,10 @@
               "browserTarget": "wsl-ui:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/wsl-ui/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
