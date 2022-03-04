@@ -28,6 +28,12 @@
     ]
   },
   "projects": {
+    "containers": {
+      "tags": []
+    },
+    "facades": {
+      "tags": []
+    },
     "models": {
       "tags": []
     },
