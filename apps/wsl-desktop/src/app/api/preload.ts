@@ -9,5 +9,5 @@ contextBridge.exposeInMainWorld('api', {
   },
   getImages:()=> ipcRenderer.invoke(Events.GetImages),
   getContainers: ()=> ipcRenderer.invoke(Events.GetContainers),
-  stopContainer: (containerId: string) => ipcRenderer.invoke(Events.StopContainer,containerId)
+  stopStartContainer: (containerId: string, action: string) => ipcRenderer.invoke(Events.StopStartContainer,containerId, action)
 });

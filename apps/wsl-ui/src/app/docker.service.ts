@@ -24,9 +24,9 @@ export class DockerService {
     })
   }
 
-  stopContainer(id: string): Observable<any> {
+  stopStartContainer(id: string,action: string): Observable<any> {
     return new Observable(subscriber => {
-      window.api.electronIpcOnce(Events.ContainerStopped,(event,arg) => {
+      window.api.electronIpcOnce(Events.ContainerStoppedStarted,(event,arg) => {
         try {
           subscriber.next(arg);
           //subscriber.next(arg);
@@ -37,7 +37,7 @@ export class DockerService {
         }
 
       });
-      window.api.stopContainer(id);
+      window.api.stopStartContainer(id, action);
     })
   }
 }

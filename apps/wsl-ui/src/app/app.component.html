@@ -1,24 +1,8 @@
-<!--
-<section>
-<header class="slds-global-header_container">
-  <div class="slds-global-header">
-    <div class="slds-global-header__item">...</div>
-    <div class="slds-global-header__item slds-global-header__item_search">
-      ...
-    </div>
-    <div class="slds-global-header__item">...</div>
-  </div>
-</header>
-<div style='top:90px;height:calc(100% - 90px)'>
-  <ng-container *ngIf="data">
-    <div *ngFor='let d of data'>
-      {{d.Names}} - {{d.Status}}
-    </div>
-  </ng-container>
-</div>
-</section>
--->
 <div class='slds-grid slds-grid_vertical'>
+  <div *ngIf='loading' class='slds-spinner_container'>
+    <ngl-spinner size='large' variant='brand'></ngl-spinner>
+  </div>
+
   <div class="slds-context-bar">
     <div class="slds-context-bar__primary">
       <div
@@ -57,11 +41,17 @@
                 <span>{{d.Names}}</span>
               </h3>
               <div class='slds-shrink-none'>
-                <button  *ngIf="'stop' | canAction : d.State" (click)="stop(d.ID)" style='color:white;background:red' class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" title="Stop">
+                <button  *ngIf="'stop' | canAction : d.State" (click)="stopStart(d.ID, 'stop')" class="slds-button slds-button_icon  slds-button_icon-x-small slds-button_icon-brand" title="Stop">
                   <svg class="slds-button__icon" aria-hidden="true">
                     <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#stop"></use>
                   </svg>
                   <span class="slds-assistive-text">Stop</span>
+                </button>
+                <button  *ngIf="'start' | canAction : d.State" (click)="stopStart(d.ID, 'start')" class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-brand" title="Start">
+                  <svg class="slds-button__icon" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#play"></use>
+                  </svg>
+                  <span class="slds-assistive-text">Start</span>
                 </button>
               </div>
             </div>
