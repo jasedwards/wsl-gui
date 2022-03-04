@@ -1,6 +1,56 @@
 {
   "version": 1,
   "projects": {
+    "containers": {
+      "projectType": "library",
+      "root": "libs/containers",
+      "sourceRoot": "libs/containers/src",
+      "prefix": "wsl-gui",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/containers"],
+          "options": {
+            "jestConfig": "libs/containers/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/containers/src/**/*.ts",
+              "libs/containers/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "facades": {
+      "projectType": "library",
+      "root": "libs/facades",
+      "sourceRoot": "libs/facades/src",
+      "prefix": "wsl-gui",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/facades"],
+          "options": {
+            "jestConfig": "libs/facades/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/facades/src/**/*.ts",
+              "libs/facades/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "models": {
       "projectType": "library",
       "root": "libs/models",
@@ -110,14 +160,20 @@
             "polyfills": "apps/wsl-ui/src/polyfills.ts",
             "tsConfig": "apps/wsl-ui/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/wsl-ui/src/favicon.ico", "apps/wsl-ui/src/assets",
+            "assets": [
+              "apps/wsl-ui/src/favicon.ico",
+              "apps/wsl-ui/src/assets",
               {
                 "glob": "**/*",
                 "input": "node_modules/@salesforce-ux/design-system/assets/",
                 "output": "/assets"
-              }],
-            "styles": [ "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
-             "node_modules/@angular/cdk/overlay-prebuilt.css","apps/wsl-ui/src/styles.scss"],
+              }
+            ],
+            "styles": [
+              "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "apps/wsl-ui/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

@@ -1,21 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
   "files": [],
-  "include": ["../../window-interface/**/*.d.ts"],
+  "include": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.lib.json"
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
     }
   ],
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
-    "strict": false,
+    "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
