@@ -208,6 +208,19 @@
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
+            "projectBuildConfig": "storybook-wrapper:storybook",
+            "assets": [
+              "apps/storybook-wrapper/src/favicon.ico",
+              "apps/storybook-wrapper/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@salesforce-ux/design-system/assets/",
+                "output": "/assets"
+              }
+            ],
+            "styles": ["apps/storybook-wrapper/src/styles.scss", "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css"
+            ],
             "uiFramework": "@storybook/angular",
             "port": 4400,
             "config": {

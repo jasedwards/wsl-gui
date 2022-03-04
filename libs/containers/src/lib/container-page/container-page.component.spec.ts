@@ -7,6 +7,7 @@ import { NglSpinnersModule } from 'ng-lightning';
 import { CommonModule } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { ContainerStates } from '@wsl-gui/models';
+import { DockerService } from '@wsl-gui/facades';
 
 describe('ContainerPageComponent', () => {
   let component: ContainerPageComponent;
@@ -63,6 +64,7 @@ describe('ContainerPageComponent', () => {
         ContainerItemComponent,
         CanActionPipe,
       ],
+      providers: [{provide: DockerService, useClass: MockDockerService}]
     }).compileComponents();
   });
 
