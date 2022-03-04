@@ -13,51 +13,57 @@ describe('ContainerPageComponent', () => {
   let fixture: ComponentFixture<ContainerPageComponent>;
 
   class MockDockerService {
-    getContainers(){
-      return of([{
-        Command: '',
-        CreatedAt: '',
-        ID: '1',
-        Image: '',
-        Labels: '',
-        LocalVolumes: '',
-        Mounts: '',
-        Names: 'Item 1',
-        Networks: 'bridge',
-        Ports: '',
-        RunningFor: '3 days',
-        Size: '13gb',
-        State: ContainerStates.Running,
-        Status: 'Up For 3 Days'
-      },{
-        Command: '',
-        CreatedAt: '',
-        ID: '2',
-        Image: '',
-        Labels: '',
-        LocalVolumes: '',
-        Mounts: '',
-        Names: 'Item 2',
-        Networks: 'bridge',
-        Ports: '',
-        RunningFor: '3 days',
-        Size: '13gb',
-        State: ContainerStates.Paused,
-        Status: 'Up For 3 Days'
-      }])
+    getContainers() {
+      return of([
+        {
+          Command: '',
+          CreatedAt: '',
+          ID: '1',
+          Image: '',
+          Labels: '',
+          LocalVolumes: '',
+          Mounts: '',
+          Names: 'Item 1',
+          Networks: 'bridge',
+          Ports: '',
+          RunningFor: '3 days',
+          Size: '13gb',
+          State: ContainerStates.Running,
+          Status: 'Up For 3 Days',
+        },
+        {
+          Command: '',
+          CreatedAt: '',
+          ID: '2',
+          Image: '',
+          Labels: '',
+          LocalVolumes: '',
+          Mounts: '',
+          Names: 'Item 2',
+          Networks: 'bridge',
+          Ports: '',
+          RunningFor: '3 days',
+          Size: '13gb',
+          State: ContainerStates.Paused,
+          Status: 'Up For 3 Days',
+        },
+      ]);
     }
 
-    performContainerAction(id: string, action: string): Observable<string>{
+    performContainerAction(id: string, action: string): Observable<string> {
       return of(id);
     }
   }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonModule,NglSpinnersModule],
-      declarations: [ ContainerPageComponent, ContainerItemComponent, CanActionPipe ]
-    })
-    .compileComponents();
+      imports: [CommonModule, NglSpinnersModule],
+      declarations: [
+        ContainerPageComponent,
+        ContainerItemComponent,
+        CanActionPipe,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

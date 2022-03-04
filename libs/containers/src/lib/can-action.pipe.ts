@@ -2,13 +2,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ContainerStates } from '@wsl-gui/models';
 
 @Pipe({
-  name: 'canAction'
+  name: 'canAction',
 })
 export class CanActionPipe implements PipeTransform {
-
   transform(action: string, state: ContainerStates): boolean {
     action = action.toLowerCase();
-    switch(state){
+    switch (state) {
       case ContainerStates.Created:
         return action === 'start';
       case ContainerStates.Restarting:
@@ -24,5 +23,4 @@ export class CanActionPipe implements PipeTransform {
         return false;
     }
   }
-
 }

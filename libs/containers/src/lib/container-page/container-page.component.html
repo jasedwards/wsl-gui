@@ -1,6 +1,10 @@
-<div class='slds-container_fluid slds-scrollable_y'>
+<div class="slds-container_fluid slds-scrollable_y">
   <div *ngIf="loading" class="slds-spinner_container">
     <ngl-spinner size="large" variant="brand"></ngl-spinner>
   </div>
-  <wsl-gui-container-item *ngFor='let container of data' [container]='container' (executeAction)='action($event)'></wsl-gui-container-item>
+  <wsl-gui-container-item
+    *ngFor="let container of data"
+    [container]="container"
+    (executeAction)="action($event)"
+  ></wsl-gui-container-item>
 </div>
