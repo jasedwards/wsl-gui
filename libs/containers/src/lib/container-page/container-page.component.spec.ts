@@ -64,7 +64,7 @@ describe('ContainerPageComponent', () => {
         ContainerItemComponent,
         CanActionPipe,
       ],
-      providers: [{provide: DockerService, useClass: MockDockerService}]
+      providers: [{ provide: DockerService, useClass: MockDockerService }],
     }).compileComponents();
   });
 

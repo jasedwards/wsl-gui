@@ -163,18 +163,23 @@ class MockDockerService {
 export default {
   title: 'containers / container page',
   component: ContainerPageComponent,
-  decorators:[
+  decorators: [
     moduleMetadata({
-      declarations: [ContainerItemComponent, CanActionPipe, ContainerPageComponent],
-      providers: [{provide: DockerService, useClass: MockDockerService}]
-    })
-  ]
+      declarations: [
+        ContainerItemComponent,
+        CanActionPipe,
+        ContainerPageComponent,
+      ],
+      providers: [{ provide: DockerService, useClass: MockDockerService }],
+    }),
+  ],
 } as Meta<ContainerPageComponent>;
 
-const Template: Story<ContainerPageComponent> = (args: ContainerPageComponent) => ({
-  props:args
+const Template: Story<ContainerPageComponent> = (
+  args: ContainerPageComponent
+) => ({
+  props: args,
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-}
+Primary.args = {};

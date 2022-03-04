@@ -6,15 +6,17 @@ import { CanActionPipe } from '../can-action.pipe';
 export default {
   title: 'containers / container item',
   component: ContainerItemComponent,
-  decorators:[
+  decorators: [
     moduleMetadata({
-      declarations: [ContainerItemComponent, CanActionPipe]
-    })
-  ]
+      declarations: [ContainerItemComponent, CanActionPipe],
+    }),
+  ],
 } as Meta<ContainerItemComponent>;
 
-const Template: Story<ContainerItemComponent> = (args: ContainerItemComponent) => ({
-  props:args
+const Template: Story<ContainerItemComponent> = (
+  args: ContainerItemComponent
+) => ({
+  props: args,
 });
 
 export const Primary = Template.bind({});
@@ -34,5 +36,5 @@ Primary.args = {
     Size: '13gb',
     State: ContainerStates.Running,
     Status: 'Up For 3 Days',
-  }
-}
+  },
+};
