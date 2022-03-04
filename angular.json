@@ -23,6 +23,37 @@
               "libs/containers/src/**/*.html"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/containers/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/containers",
+            "config": {
+              "configFolder": "libs/containers/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       }
     },
@@ -72,6 +103,163 @@
               "libs/models/src/**/*.ts",
               "libs/models/src/**/*.html"
             ]
+          }
+        }
+      }
+    },
+    "storybook-wrapper": {
+      "projectType": "application",
+      "root": "apps/storybook-wrapper",
+      "sourceRoot": "apps/storybook-wrapper/src",
+      "prefix": "wsl-gui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/storybook-wrapper",
+            "index": "apps/storybook-wrapper/src/index.html",
+            "main": "apps/storybook-wrapper/src/main.ts",
+            "polyfills": "apps/storybook-wrapper/src/polyfills.ts",
+            "tsConfig": "apps/storybook-wrapper/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/storybook-wrapper/src/favicon.ico",
+              "apps/storybook-wrapper/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@salesforce-ux/design-system/assets/",
+                "output": "/assets"
+              }
+            ],
+            "styles": ["apps/storybook-wrapper/src/styles.scss", "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/storybook-wrapper/src/environments/environment.ts",
+                  "with": "apps/storybook-wrapper/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "storybook-wrapper:build:production"
+            },
+            "development": {
+              "browserTarget": "storybook-wrapper:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "storybook-wrapper:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/storybook-wrapper/src/**/*.ts",
+              "apps/storybook-wrapper/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/storybook-wrapper"],
+          "options": {
+            "jestConfig": "apps/storybook-wrapper/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/storybook-wrapper/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/storybook-wrapper",
+            "config": {
+              "configFolder": "apps/storybook-wrapper/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "storybook-wrapper-e2e": {
+      "root": "apps/storybook-wrapper-e2e",
+      "sourceRoot": "apps/storybook-wrapper-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/storybook-wrapper-e2e/cypress.json",
+            "devServerTarget": "storybook-wrapper:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "storybook-wrapper:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/storybook-wrapper-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -308,5 +496,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "wsl-ui"
+  "defaultProject": "storybook-wrapper"
 }
