@@ -242,7 +242,7 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/storybook-wrapper",
+            "outputPath": "docs",
             "config": {
               "configFolder": "apps/storybook-wrapper/.storybook"
             }
