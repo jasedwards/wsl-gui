@@ -21,6 +21,5 @@
       "@wsl-gui/models": ["libs/models/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"],
-  "include": ["window-interface/**/*.d.ts"]
+  "exclude": ["node_modules", "tmp"]
 }
