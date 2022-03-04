@@ -255,32 +255,6 @@
         }
       }
     },
-    "storybook-wrapper-e2e": {
-      "root": "apps/storybook-wrapper-e2e",
-      "sourceRoot": "apps/storybook-wrapper-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/storybook-wrapper-e2e/cypress.json",
-            "devServerTarget": "storybook-wrapper:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "storybook-wrapper:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/storybook-wrapper-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
     "wsl-desktop": {
       "root": "apps/wsl-desktop",
       "sourceRoot": "apps/wsl-desktop/src",
