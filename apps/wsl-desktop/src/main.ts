@@ -19,7 +19,7 @@ export default class Main {
 
   static bootstrapAppEvents() {
     ElectronEvents.bootstrapElectronEvents();
-  //  ChildProcess.start();
+    //  ChildProcess.start();
     // initialize auto updater service
     if (!App.isDevelopmentMode()) {
       // UpdateEvents.initAutoUpdateService();
