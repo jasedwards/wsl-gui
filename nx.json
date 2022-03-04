@@ -37,6 +37,13 @@
     "models": {
       "tags": []
     },
+    "storybook-wrapper": {
+      "tags": []
+    },
+    "storybook-wrapper-e2e": {
+      "tags": [],
+      "implicitDependencies": ["storybook-wrapper"]
+    },
     "wsl-desktop": {},
     "wsl-ui": {
       "tags": []
