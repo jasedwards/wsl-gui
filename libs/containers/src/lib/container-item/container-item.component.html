@@ -1,6 +1,6 @@
 <article class="slds-tile">
   <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
-    <h3 class="slds-tile__title slds-truncate" title="Salesforce UX">
+    <h3 class="slds-tile__title slds-truncate" title="{{'Container Name: ' + container.Names}}">
       <span>{{ container.Names }}</span>
     </h3>
     <div class="slds-shrink-none">
@@ -76,37 +76,37 @@
     <dl class="slds-list_horizontal slds-wrap">
       <dt
         class="slds-item_label slds-text-color_weak slds-truncate"
-        title="First Label"
+        title="Status"
       >
         Status:
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="Description for first label"
+        title="{{'Status: ' + container.Status}}"
       >
         {{ container.Status }}
       </dd>
       <dt
         class="slds-item_label slds-text-color_weak slds-truncate"
-        title="Second Label"
+        title="Run Date"
       >
-        Date Ran:
+        Run Date:
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="Description for second label"
+        title="{{'Run Date: ' + container.RunningFor}}"
       >
         {{ container.RunningFor }}
       </dd>
       <dt
         class="slds-item_label slds-text-color_weak slds-truncate"
-        title="Second Label"
+        title="State"
       >
         State:
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="Description for second label"
+        title="{{'State: ' + container.State}}"
       >
         {{ container.State }}
       </dd>
