@@ -68,6 +68,45 @@
                   </svg>
                   <span class="slds-assistive-text">Start</span>
                 </button>
+                <button
+                  *ngIf="'restart' | canAction: d.State"
+                  (click)="stopStart(d.ID, 'restart')"
+                  class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-brand"
+                  title="Restart"
+                >
+                  <svg class="slds-button__icon" aria-hidden="true">
+                    <use
+                      xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#play"
+                    ></use>
+                  </svg>
+                  <span class="slds-assistive-text">Restart</span>
+                </button>
+                <button
+                  *ngIf="'pause' | canAction: d.State"
+                  (click)="stopStart(d.ID, 'pause')"
+                  class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-brand"
+                  title="Pause"
+                >
+                  <svg class="slds-button__icon" aria-hidden="true">
+                    <use
+                      xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#pause_alt"
+                    ></use>
+                  </svg>
+                  <span class="slds-assistive-text">Pause</span>
+                </button>
+                <button
+                  *ngIf="'unpause' | canAction: d.State"
+                  (click)="stopStart(d.ID, 'unpause')"
+                  class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-border-filled"
+                  title="Unpause"
+                >
+                  <svg class="slds-button__icon" aria-hidden="true">
+                    <use
+                      xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#pause_alt"
+                    ></use>
+                  </svg>
+                  <span class="slds-assistive-text">Unpause</span>
+                </button>
               </div>
             </div>
 

@@ -20,11 +20,11 @@ export class CanActionPipe implements PipeTransform {
         return action === 'start';
       case ContainerStates.Restarting:
       case ContainerStates.Running:
-        return action === 'stop';
+        return action === 'stop' || action === 'restart' || action === 'pause';
       case ContainerStates.Removing:
         return false;
       case ContainerStates.Paused:
-        return true;
+        return action !== 'pause';
       case ContainerStates.Exited:
           return action === 'start';
       case ContainerStates.Dead:
