@@ -4,5 +4,5 @@ export const enum Events {
   GetContainers = 'get-containers',
   SendContainers = 'containers',
   StopStartContainer = 'stop-start-container',
-  ContainerStoppedStarted = 'container-stopped-started'
-};
+  ContainerStoppedStarted = 'container-stopped-started',
+}
