@@ -26,7 +26,7 @@ describe('CanActionPipe', () => {
   });
 
   it('returns correct results for Paused', () => {
-    run(ContainerStates.Paused, [true, true, true, false, true]);
+    run(ContainerStates.Paused, [false, true, true, false, true]);
   });
 
   it('returns correct results for Exited', () => {

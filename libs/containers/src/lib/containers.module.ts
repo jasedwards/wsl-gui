@@ -8,5 +8,6 @@ import { NglSpinnersModule } from 'ng-lightning';
 @NgModule({
   imports: [CommonModule, NglSpinnersModule],
   declarations: [ContainerItemComponent, ContainerPageComponent, CanActionPipe],
+  exports: [ContainerPageComponent],
 })
 export class ContainersModule {}

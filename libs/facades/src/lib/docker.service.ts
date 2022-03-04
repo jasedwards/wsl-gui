@@ -2,13 +2,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContainerInfo, Events } from '@wsl-gui/models';
 
+interface WindowApi extends Window {
+  api: {
+    getImages: () => void;
+    getContainers: () => void;
+    electronIpcOnce: (
+      channel: string,
+      listener: (event: any, ...arg: any) => void
+    ) => void;
+    stopStartContainer: (containerId: string, action: string) => void;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class DockerService {
+  win = window as unknown as WindowApi;
   getContainers(): Observable<ContainerInfo[]> {
     return new Observable((subscriber) => {
-      window.api.electronIpcOnce(Events.SendContainers, (event, arg) => {
+      this.win.api.electronIpcOnce(Events.SendContainers, (event, arg) => {
         try {
           subscriber.next(JSON.parse(`[${arg}]`));
         } catch (ex) {
@@ -17,20 +30,20 @@ export class DockerService {
           subscriber.complete();
         }
       });
-      window.api.getContainers();
+      this.win.api.getContainers();
     });
   }
 
   performContainerAction(id: string, action: string): Observable<string> {
     return new Observable((subscriber) => {
-      window.api.electronIpcOnce(
+      this.win.api.electronIpcOnce(
         Events.ContainerStoppedStarted,
         (event, arg) => {
           subscriber.next(arg);
           subscriber.complete();
         }
       );
-      window.api.stopStartContainer(id, action);
+      this.win.api.stopStartContainer(id, action);
     });
   }
 }

@@ -16,7 +16,7 @@ export class CanActionPipe implements PipeTransform {
       case ContainerStates.Removing:
         return false;
       case ContainerStates.Paused:
-        return action !== 'pause';
+        return action !== 'pause' && action !== 'start';
       case ContainerStates.Exited:
         return action === 'start';
       case ContainerStates.Dead:

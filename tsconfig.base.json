@@ -13,6 +13,7 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "types": ["window-interface"],
     "baseUrl": ".",
     "paths": {
       "@wsl-gui/containers": ["libs/containers/src/index.ts"],
@@ -20,5 +21,6 @@
       "@wsl-gui/models": ["libs/models/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": ["window-interface/**/*.d.ts"]
 }

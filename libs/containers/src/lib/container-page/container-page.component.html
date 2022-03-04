@@ -2,9 +2,12 @@
   <div *ngIf="loading" class="slds-spinner_container">
     <ngl-spinner size="large" variant="brand"></ngl-spinner>
   </div>
-  <wsl-gui-container-item
-    *ngFor="let container of data"
-    [container]="container"
-    (executeAction)="action($event)"
-  ></wsl-gui-container-item>
+  <ul class="slds-has-dividers_around-space">
+    <li class="slds-item slds-theme_default" *ngFor="let container of data">
+      <wsl-gui-container-item
+        [container]="container"
+        (executeAction)="action($event)"
+      ></wsl-gui-container-item>
+    </li>
+  </ul>
 </div>

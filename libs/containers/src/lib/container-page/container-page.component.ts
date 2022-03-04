@@ -24,8 +24,8 @@ export class ContainerPageComponent implements OnInit {
     this.getList();
   }
 
-  action(data:{ id: string, action:string}) {
-    const {id, action} = data;
+  action(data: { id: string; action: string }) {
+    const { id, action } = data;
     this.loading = true;
     this.cd.detectChanges();
     this.service.performContainerAction(id, action).subscribe((_) => {
