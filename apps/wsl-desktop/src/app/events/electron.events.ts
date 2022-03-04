@@ -45,15 +45,15 @@ ipcMain.handle(Events.GetContainers, (event) => {
   });
 });
 
-ipcMain.handle(Events.StopContainer, (event,containerId) => {
-  const process = WslProcess.execute(`stop ${containerId}`);
+ipcMain.handle(Events.StopStartContainer, (event,containerId,action) => {
+  const process = WslProcess.execute(`${action} ${containerId}`);
   process.stdout.on('data',data => {
     process.kill(0);
-    App.mainWindow.webContents.send(Events.ContainerStopped, data);
+    App.mainWindow.webContents.send(Events.ContainerStoppedStarted, data);
   });
 
   process.stderr.on('data', (data) => {
     process.kill(0);
-    App.mainWindow.webContents.send(Events.ContainerStopped, data);
+    App.mainWindow.webContents.send(Events.ContainerStoppedStarted, data);
   });
 });

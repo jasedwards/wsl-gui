@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CanActionPipe } from './can-action.pipe';
+import { NglSpinnersModule } from 'ng-lightning';
 
 @NgModule({
   declarations: [AppComponent, CanActionPipe],
-  imports: [BrowserModule],
+  imports: [BrowserModule, NglSpinnersModule],
   providers: [],
   bootstrap: [AppComponent],
 })
