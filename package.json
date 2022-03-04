@@ -8,7 +8,8 @@
     "start": "nx serve wsl-ui && nx serve wsl-desktop",
     "build": "nx build",
     "test": "nx test",
-    "serve:main": "nx serve --inspect=inspect-brk wsl-desktop"
+    "serve:main": "nx serve --inspect=inspect-brk wsl-desktop",
+    "affected:test": "nx affected:test"
   },
   "private": true,
   "dependencies": {

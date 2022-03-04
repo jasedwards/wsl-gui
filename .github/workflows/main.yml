@@ -40,4 +40,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run Affected Tests
         shell: bash
-        run: nx affected:test --base=remotes/origin/master
+        run: npm run affected:test -- --base=remotes/origin/master
