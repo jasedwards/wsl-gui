@@ -10,7 +10,7 @@ interface WindowApi extends Window {
       channel: string,
       listener: (event: any, ...arg: any) => void
     ) => void;
-    stopStartContainer: (containerId: string, action: string) => void;
+    ExecuteContainerCmd: (containerId: string, action: string) => void;
   };
 }
 
@@ -37,13 +37,13 @@ export class DockerService {
   performContainerAction(id: string, action: string): Observable<string> {
     return new Observable((subscriber) => {
       this.win.api.electronIpcOnce(
-        Events.ContainerStoppedStarted,
+        Events.ContainerCmdExecuted,
         (event, arg) => {
           subscriber.next(arg);
           subscriber.complete();
         }
       );
-      this.win.api.stopStartContainer(id, action);
+      this.win.api.ExecuteContainerCmd(id, action);
     });
   }
 }
