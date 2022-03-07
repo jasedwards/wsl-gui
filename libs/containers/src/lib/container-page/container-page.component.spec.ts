@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { ContainerStates } from '@wsl-gui/models';
 import { DockerService } from '@wsl-gui/facades';
+import { provideMockStore } from '@ngrx/store/testing';
+import { CdCoreModule } from '@wsl-gui/core';
 
 describe('ContainerPageComponent', () => {
   let component: ContainerPageComponent;
@@ -56,15 +58,56 @@ describe('ContainerPageComponent', () => {
     }
   }
 
+  const containerState = {
+    Loading: false,
+    Containers: [
+      {
+        Command: '',
+        CreatedAt: '',
+        ID: '1',
+        Image: '',
+        Labels: '',
+        LocalVolumes: '',
+        Mounts: '',
+        Names: 'Item 1',
+        Networks: 'bridge',
+        Ports: '',
+        RunningFor: '3 days',
+        Size: '13gb',
+        State: ContainerStates.Running,
+        Status: 'Up For 3 Days',
+      },
+      {
+        Command: '',
+        CreatedAt: '',
+        ID: '2',
+        Image: '',
+        Labels: '',
+        LocalVolumes: '',
+        Mounts: '',
+        Names: 'Item 2',
+        Networks: 'bridge',
+        Ports: '',
+        RunningFor: '3 days',
+        Size: '13gb',
+        State: ContainerStates.Paused,
+        Status: 'Up For 3 Days',
+      },
+    ],
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonModule, NglSpinnersModule],
+      imports: [CommonModule, NglSpinnersModule, CdCoreModule],
       declarations: [
         ContainerPageComponent,
         ContainerItemComponent,
         CanActionPipe,
       ],
-      providers: [{ provide: DockerService, useClass: MockDockerService }],
+      providers: [
+        { provide: DockerService, useClass: MockDockerService },
+        provideMockStore({ initialState: containerState }),
+      ],
     }).compileComponents();
   });
 

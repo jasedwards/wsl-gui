@@ -12,6 +12,6 @@ contextBridge.exposeInMainWorld('api', {
   },
   getImages: () => ipcRenderer.invoke(Events.GetImages),
   getContainers: () => ipcRenderer.invoke(Events.GetContainers),
-  stopStartContainer: (containerId: string, action: string) =>
-    ipcRenderer.invoke(Events.StopStartContainer, containerId, action),
+  ExecuteContainerCmd: (containerId: string, action: string) =>
+    ipcRenderer.invoke(Events.ExecuteContainerCmd, containerId, action),
 });

@@ -1,35 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DockerService } from '@wsl-gui/facades';
 import { ContainerInfo } from '@wsl-gui/models';
+import { ContainersFacade } from '../containers.facade';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'wsl-gui-container-page',
   templateUrl: './container-page.component.html',
   styleUrls: ['./container-page.component.scss'],
 })
-export class ContainerPageComponent implements OnInit {
-  data: ContainerInfo[] = [];
-  loading = true;
-  constructor(private service: DockerService, private cd: ChangeDetectorRef) {}
-
-  private getList() {
-    this.service.getContainers().subscribe((val) => {
-      this.data = val;
-      this.loading = false;
-      this.cd.detectChanges();
-    });
-  }
-
-  ngOnInit() {
-    this.getList();
-  }
-
+export class ContainerPageComponent {
+  constructor(public facade: ContainersFacade, private cd: ChangeDetectorRef) {}
   action(data: { id: string; action: string }) {
     const { id, action } = data;
-    this.loading = true;
-    this.cd.detectChanges();
-    this.service.performContainerAction(id, action).subscribe((_) => {
-      this.getList();
-    });
+    this.facade.performAction(id, action);
   }
 }

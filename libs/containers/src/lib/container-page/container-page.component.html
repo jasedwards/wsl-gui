@@ -1,9 +1,12 @@
 <div class="slds-container_fluid slds-scrollable_y">
-  <div *ngIf="loading" class="slds-spinner_container">
+  <div *ngIf="facade.loading$ | async" class="slds-spinner_container">
     <ngl-spinner size="large" variant="brand"></ngl-spinner>
   </div>
   <ul class="slds-has-dividers_around-space">
-    <li class="slds-item slds-theme_default" *ngFor="let container of data">
+    <li
+      class="slds-item slds-theme_default"
+      *ngFor="let container of facade.containers$ | async | cd"
+    >
       <wsl-gui-container-item
         [container]="container"
         (executeAction)="action($event)"

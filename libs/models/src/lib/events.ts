@@ -3,6 +3,6 @@ export const enum Events {
   SendImages = 'images',
   GetContainers = 'get-containers',
   SendContainers = 'containers',
-  StopStartContainer = 'stop-start-container',
-  ContainerStoppedStarted = 'container-stopped-started',
+  ExecuteContainerCmd = 'execute-container',
+  ContainerCmdExecuted = 'container-executed',
 }

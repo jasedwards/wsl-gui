@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@wsl-gui/containers": ["libs/containers/src/index.ts"],
+      "@wsl-gui/core": ["libs/core/src/index.ts"],
       "@wsl-gui/facades": ["libs/facades/src/index.ts"],
       "@wsl-gui/models": ["libs/models/src/index.ts"]
     }

@@ -1,6 +1,9 @@
 <article class="slds-tile">
   <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
-    <h3 class="slds-tile__title slds-truncate" title="{{'Container Name: ' + container.Names}}">
+    <h3
+      class="slds-tile__title slds-truncate"
+      title="{{ 'Container Name: ' + container.Names }}"
+    >
       <span>{{ container.Names }}</span>
     </h3>
     <div class="slds-shrink-none">
@@ -82,7 +85,7 @@
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="{{'Status: ' + container.Status}}"
+        title="{{ 'Status: ' + container.Status }}"
       >
         {{ container.Status }}
       </dd>
@@ -94,7 +97,7 @@
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="{{'Run Date: ' + container.RunningFor}}"
+        title="{{ 'Run Date: ' + container.RunningFor }}"
       >
         {{ container.RunningFor }}
       </dd>
@@ -106,7 +109,7 @@
       </dt>
       <dd
         class="slds-item_detail slds-truncate"
-        title="{{'State: ' + container.State}}"
+        title="{{ 'State: ' + container.State }}"
       >
         {{ container.State }}
       </dd>

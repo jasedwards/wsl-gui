@@ -49,7 +49,7 @@ export default class App {
     // if(App.isDevelopmentMode()){
     //   App.mainWindow.webContents.openDevTools();
     // }
-    App.mainWindow.webContents.openDevTools();
+    // App.mainWindow.webContents.openDevTools();
   }
 
   private static onActivate() {
@@ -111,6 +111,12 @@ export default class App {
           slashes: true,
         })
       );
+    }
+    if (App.isDevelopmentMode()) {
+      App.mainWindow.webContents.setDevToolsWebContents(
+        new BrowserWindow().webContents
+      );
+      App.mainWindow.webContents.openDevTools();
     }
   }
 

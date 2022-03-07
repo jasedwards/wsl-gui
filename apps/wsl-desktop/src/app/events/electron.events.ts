@@ -29,7 +29,6 @@ ipcMain.on('quit', (event, code) => {
 });
 
 ipcMain.handle(Events.GetContainers, (event) => {
-  // const process = WslProcess.execute(`ps -a --format '{"ID":"{{ .ID }}", "Image": "{{ .Image }}", "Names":"{{ .Names }}", "Status":"{{ .Status}}"}'`);
   const process = WslProcess.execute(
     `ps --all --no-trunc --format='{{json .}}'`
   );
@@ -48,15 +47,15 @@ ipcMain.handle(Events.GetContainers, (event) => {
   });
 });
 
-ipcMain.handle(Events.StopStartContainer, (event, containerId, action) => {
+ipcMain.handle(Events.ExecuteContainerCmd, (event, containerId, action) => {
   const process = WslProcess.execute(`${action} ${containerId}`);
   process.stdout.on('data', (data) => {
     process.kill(0);
-    App.mainWindow.webContents.send(Events.ContainerStoppedStarted, data);
+    App.mainWindow.webContents.send(Events.ContainerCmdExecuted, data);
   });
 
   process.stderr.on('data', (data) => {
     process.kill(0);
-    App.mainWindow.webContents.send(Events.ContainerStoppedStarted, data);
+    App.mainWindow.webContents.send(Events.ContainerCmdExecuted, data);
   });
 });
