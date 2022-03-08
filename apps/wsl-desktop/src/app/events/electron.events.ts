@@ -59,3 +59,15 @@ ipcMain.handle(Events.ExecuteContainerCmd, (event, containerId, action) => {
     App.mainWindow.webContents.send(Events.ContainerCmdExecuted, data);
   });
 });
+
+ipcMain.handle(Events.GetSettings, () => {
+  App.mainWindow.webContents.send(Events.ReturnGetSettings, App.DB.store);
+});
+
+ipcMain.handle(Events.SetSettings, (event, settings) => {
+  App.DB.set(settings);
+  App.mainWindow.webContents.send(Events.LogMessage, {
+    message: 'Settings Saved',
+    type: 'success',
+  });
+});

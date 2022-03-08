@@ -5,4 +5,8 @@ export const enum Events {
   SendContainers = 'containers',
   ExecuteContainerCmd = 'execute-container',
   ContainerCmdExecuted = 'container-executed',
+  GetSettings = 'get-settings',
+  ReturnGetSettings = 'return-get-settings',
+  SetSettings = 'set-settings',
+  LogMessage = 'log-message',
 }

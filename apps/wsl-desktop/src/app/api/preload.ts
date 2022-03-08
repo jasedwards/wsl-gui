@@ -14,4 +14,6 @@ contextBridge.exposeInMainWorld('api', {
   getContainers: () => ipcRenderer.invoke(Events.GetContainers),
   ExecuteContainerCmd: (containerId: string, action: string) =>
     ipcRenderer.invoke(Events.ExecuteContainerCmd, containerId, action),
+  SetSettings: (settings) => ipcRenderer.invoke(Events.SetSettings, settings),
+  GetSettings: () => ipcRenderer.invoke(Events.GetSettings),
 });
