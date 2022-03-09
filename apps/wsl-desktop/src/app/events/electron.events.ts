@@ -61,7 +61,8 @@ ipcMain.handle(Events.ExecuteContainerCmd, (event, containerId, action) => {
 });
 
 ipcMain.handle(Events.GetSettings, () => {
-  App.mainWindow.webContents.send(Events.ReturnGetSettings, App.DB.store);
+  const store = App.DB.store;
+  App.mainWindow.webContents.send(Events.ReturnGetSettings, store);
 });
 
 ipcMain.handle(Events.SetSettings, (event, settings) => {

@@ -127,7 +127,7 @@ export default class App {
     // Electron.BrowserWindow into this function
     // so this class has no dependencies. This
     // makes the code easier to write tests for
-    App.DB = new Store({
+    const schema = {
       // containers: {
       //   type: "object",
       //   properties: {
@@ -136,10 +136,12 @@ export default class App {
       // }
       refresh: {
         type: 'number',
-        description: 'Refresh time in minutes',
+        // description: 'Refresh time in minutes',
         default: 0.5,
       },
-    });
+    };
+    App.DB = new Store({ schema });
+
     App.BrowserWindow = browserWindow;
     App.application = app;
 

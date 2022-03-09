@@ -5,9 +5,11 @@ import { ContainersModule } from '@wsl-gui/containers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DockerService } from '@wsl-gui/facades';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export function getSettings(service: DockerService) {
-  return service.getSettings();
+  return () => service.getSettings();
 }
 
 @NgModule({
@@ -16,6 +18,7 @@ export function getSettings(service: DockerService) {
     BrowserModule,
     ContainersModule,
     StoreModule.forRoot({}, {}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot(),
   ],
   providers: [

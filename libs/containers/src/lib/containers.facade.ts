@@ -22,6 +22,7 @@ export class ContainersFacade {
 
   private init() {
     this.store.dispatch(ContainersActions.loadContainers());
+
     interval(1000 * (this.dockerService.settings.refresh * 60)).subscribe(
       () => {
         this.store.dispatch(ContainersActions.loadContainers());

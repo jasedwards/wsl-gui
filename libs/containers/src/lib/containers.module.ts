@@ -8,7 +8,6 @@ import { StoreModule } from '@ngrx/store';
 import * as fromContainers from './containers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ContainersEffects } from './containers.effects';
-import { CdCoreModule } from '@wsl-gui/core';
 
 @NgModule({
   imports: [
@@ -19,7 +18,6 @@ import { CdCoreModule } from '@wsl-gui/core';
       fromContainers.reducer
     ),
     EffectsModule.forFeature([ContainersEffects]),
-    CdCoreModule,
   ],
   declarations: [ContainerItemComponent, ContainerPageComponent, CanActionPipe],
   exports: [ContainerPageComponent],

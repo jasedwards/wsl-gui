@@ -1,6 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ContainerInfo, Events, Settings } from '@wsl-gui/models';
+import { Injectable, NgZone } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import {
+  ContainerInfo,
+  ContainerStates,
+  Events,
+  Settings,
+} from '@wsl-gui/models';
 
 interface WindowApi extends Window {
   api: {
@@ -28,23 +33,33 @@ export class DockerService {
     return this._settings;
   }
 
+  constructor(private zone: NgZone) {}
+
   getSettings(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.win.api.electronIpcOnce(Events.ReturnGetSettings, (settings) => {
-        this._settings = settings;
-        resolve();
-      });
+      this.win.api.electronIpcOnce(
+        Events.ReturnGetSettings,
+        (event, settings) => {
+          this._settings = settings;
+          resolve();
+        }
+      );
       this.win.api.GetSettings();
     });
   }
 
+  private firstTime = true;
   getContainers(): Observable<ContainerInfo[]> {
     return new Observable((subscriber) => {
       this.win.api.electronIpcOnce(Events.SendContainers, (event, arg) => {
         try {
-          subscriber.next(JSON.parse(`[${arg}]`));
+          console.log('first time is ' + this.firstTime);
+          this.firstTime = false;
+          this.zone.run(() => {
+            subscriber.next(JSON.parse(`[${arg}]`));
+          });
         } catch (ex) {
-          subscriber.next(ex);
+          subscriber.next([]);
         } finally {
           subscriber.complete();
         }
@@ -58,7 +73,9 @@ export class DockerService {
       this.win.api.electronIpcOnce(
         Events.ContainerCmdExecuted,
         (event, arg) => {
-          subscriber.next(arg);
+          this.zone.run(() => {
+            subscriber.next(arg);
+          });
           subscriber.complete();
         }
       );

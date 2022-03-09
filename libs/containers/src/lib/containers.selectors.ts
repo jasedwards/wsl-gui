@@ -6,10 +6,9 @@ export const selectContainersState =
     fromContainers.containersFeatureKey
   );
 
-export const getContainers = createSelector(
-  selectContainersState,
-  (state) => state.Containers
-);
+export const getContainers = createSelector(selectContainersState, (state) => {
+  return state.Containers;
+});
 export const getIsLoading = createSelector(
   selectContainersState,
   (state) => state.Loading

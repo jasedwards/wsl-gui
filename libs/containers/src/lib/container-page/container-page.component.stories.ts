@@ -6,7 +6,6 @@ import { ContainerPageComponent } from './container-page.component';
 import { Observable, of } from 'rxjs';
 import { DockerService } from '../../../../facades/src';
 import { ContainersFacade } from '../containers.facade';
-import { CdCoreModule } from '../../../../core/src';
 
 class MockFacade {
   loading$ = of(false);
@@ -323,7 +322,7 @@ export default {
   component: ContainerPageComponent,
   decorators: [
     moduleMetadata({
-      imports: [CdCoreModule],
+      imports: [],
       declarations: [
         ContainerItemComponent,
         CanActionPipe,
