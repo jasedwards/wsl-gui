@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ContainerInfo, Events } from '@wsl-gui/models';
+import { ContainerInfo, Events, Settings } from '@wsl-gui/models';
 
 interface WindowApi extends Window {
   api: {
@@ -11,6 +11,8 @@ interface WindowApi extends Window {
       listener: (event: any, ...arg: any) => void
     ) => void;
     ExecuteContainerCmd: (containerId: string, action: string) => void;
+    SetSettings: (settings: { [key: string]: any }) => void;
+    GetSettings: () => void;
   };
 }
 
@@ -19,6 +21,23 @@ interface WindowApi extends Window {
 })
 export class DockerService {
   win = window as unknown as WindowApi;
+
+  private _settings!: Settings;
+
+  get settings() {
+    return this._settings;
+  }
+
+  getSettings(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.win.api.electronIpcOnce(Events.ReturnGetSettings, (settings) => {
+        this._settings = settings;
+        resolve();
+      });
+      this.win.api.GetSettings();
+    });
+  }
+
   getContainers(): Observable<ContainerInfo[]> {
     return new Observable((subscriber) => {
       this.win.api.electronIpcOnce(Events.SendContainers, (event, arg) => {

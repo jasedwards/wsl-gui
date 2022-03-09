@@ -137,6 +137,7 @@ export default class App {
       refresh: {
         type: 'number',
         description: 'Refresh time in minutes',
+        default: 0.5,
       },
     });
     App.BrowserWindow = browserWindow;

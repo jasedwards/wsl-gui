@@ -56,6 +56,14 @@ describe('ContainerPageComponent', () => {
     performContainerAction(id: string, action: string): Observable<string> {
       return of(id);
     }
+
+    getSettings() {
+      return Promise.resolve();
+    }
+
+    get settings() {
+      return { refresh: 0.5 };
+    }
   }
 
   const containerState = {
