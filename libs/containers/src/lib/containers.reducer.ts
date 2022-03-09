@@ -7,18 +7,20 @@ export const containersFeatureKey = 'containers';
 export interface ContainerState {
   Containers: ContainerInfo[];
   Loading: boolean;
+  Loaded: boolean;
 }
 
 export const initialState: ContainerState = {
   Containers: [],
   Loading: false,
+  Loaded: false
 };
 
 export const reducer = createReducer(
   initialState,
 
   on(ContainersActions.containersLoaded, (state, data) => {
-    return Object.assign({}, state, { Containers: data.containers });
+    return Object.assign({}, state, { Containers: data.containers, Loaded: true });
   }),
   on(ContainersActions.performAction, (state) => {
     return Object.assign({}, state, { Loading: true });
