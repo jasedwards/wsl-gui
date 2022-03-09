@@ -11,5 +11,5 @@ export const getContainers = createSelector(selectContainersState, (state) => {
 });
 export const getIsLoading = createSelector(
   selectContainersState,
-  (state) => state.Loading
+  (state) => state.Loading || !state.Loaded
 );

@@ -67,6 +67,7 @@ describe('ContainerPageComponent', () => {
 
   const containerState = {
     Loading: false,
+    Loaded: true,
     Containers: [
       {
         Command: '',
