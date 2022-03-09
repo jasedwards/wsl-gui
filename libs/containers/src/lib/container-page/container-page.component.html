@@ -5,7 +5,7 @@
   <ul class="slds-has-dividers_around-space">
     <li
       class="slds-item slds-theme_default"
-      *ngFor="let container of facade.containers$ | async | cd"
+      *ngFor="let container of facade.containers$ | async"
     >
       <wsl-gui-container-item
         [container]="container"

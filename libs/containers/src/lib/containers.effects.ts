@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { concatMap, map, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
-
+import { map, switchMap } from 'rxjs/operators';
 import * as ContainersActions from './containers.actions';
 import { DockerService } from '@wsl-gui/facades';
 
@@ -13,7 +10,9 @@ export class ContainersEffects {
     return this.actions$.pipe(
       ofType(ContainersActions.loadContainers),
       switchMap(() => this.dockerService.getContainers()),
-      map((val) => ContainersActions.containersLoaded({ containers: val }))
+      map((val) => {
+        return ContainersActions.containersLoaded({ containers: val });
+      })
     );
   });
 

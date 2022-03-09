@@ -3,6 +3,7 @@ import { rendererAppName, rendererAppPort } from './constants';
 import { environment } from '../environments/environment';
 import { join } from 'path';
 import { format } from 'url';
+const Store = require('electron-store');
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -10,6 +11,7 @@ export default class App {
   static mainWindow: Electron.BrowserWindow;
   static application: Electron.App;
   static BrowserWindow;
+  static DB: any;
 
   public static isDevelopmentMode() {
     const isEnvironmentSet: boolean = 'ELECTRON_IS_DEV' in process.env;
@@ -125,6 +127,20 @@ export default class App {
     // Electron.BrowserWindow into this function
     // so this class has no dependencies. This
     // makes the code easier to write tests for
+    const schema = {
+      // containers: {
+      //   type: "object",
+      //   properties: {
+      //
+      //   }
+      // }
+      refresh: {
+        type: 'number',
+        // description: 'Refresh time in minutes',
+        default: 0.5,
+      },
+    };
+    App.DB = new Store({ schema });
 
     App.BrowserWindow = browserWindow;
     App.application = app;

@@ -9,7 +9,6 @@ import { Observable, of } from 'rxjs';
 import { ContainerStates } from '@wsl-gui/models';
 import { DockerService } from '@wsl-gui/facades';
 import { provideMockStore } from '@ngrx/store/testing';
-import { CdCoreModule } from '@wsl-gui/core';
 
 describe('ContainerPageComponent', () => {
   let component: ContainerPageComponent;
@@ -56,6 +55,14 @@ describe('ContainerPageComponent', () => {
     performContainerAction(id: string, action: string): Observable<string> {
       return of(id);
     }
+
+    getSettings() {
+      return Promise.resolve();
+    }
+
+    get settings() {
+      return { refresh: 0.5 };
+    }
   }
 
   const containerState = {
@@ -98,7 +105,7 @@ describe('ContainerPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonModule, NglSpinnersModule, CdCoreModule],
+      imports: [CommonModule, NglSpinnersModule],
       declarations: [
         ContainerPageComponent,
         ContainerItemComponent,
